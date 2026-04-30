@@ -1,0 +1,25 @@
+# Data (keep folder structure, ignore contents)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*.csv
+data/processed/*.npz
+# Virtual environment
+venv/
+# Environment variables
+.env
+# Python
+__pycache__/
+*.py[cod]
+*.pkl
+*.h5
+# Jupyter
+.ipynb_checkpoints/
+# IDE
+.vscode/
+.idea/
+# OS
+.DS_Store
+# Logs
+*.log
+# Models 
+outputs/models/
