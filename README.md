@@ -1,7 +1,7 @@
 # Intelligent Bug Triage & Fix-Time Prediction
 
 ## My Motive
-This project is a part of my self-studies, where I challenge myself to implement an end-to-end machine learning pipeline—from raw, multi-source data ingestion and rigorous cleaning to advanced feature engineering and the deployment of multivariate statistical and machine learning models (PCA, LDA, linear and logistic regression, CART, k‑nearest neighbors, and neural networks)—to solve a real-world software engineering problem: intelligent bug triage and fix‑time prediction. It reflects my hands-on commitment to mastering the exact skills required in data-driven technology roles at companies like IBM, Deloitte, Oracle, and SAP.
+This project is a part of my self-studies, where I challenge myself to implement an end-to-end machine learning pipeline; from raw, multi-source data ingestion and rigorous cleaning to advanced feature engineering and the deployment of multivariate statistical and machine learning models (PCA, LDA, linear and logistic regression, CART, k‑nearest neighbors, and neural networks)— to solve a real-world software engineering problem: intelligent bug triage and fix‑time prediction. It reflects my hands-on commitment to mastering the exact skills required in data-driven technology roles at companies like IBM, Deloitte, Oracle, and SAP.
 
 ## Phase 1: Setup and Data Exploration
 
