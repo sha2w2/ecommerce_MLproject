@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, r
 def evaluate_regression(y_true, y_pred, model_name="Model"):
     """Calculates and prints regression metrics."""
     mae = mean_absolute_error(y_true, y_pred)
-    rmse = root_mean_squared_error(y_true, y_pred, squared=False)
+    rmse = root_mean_squared_error(y_true, y_pred)
     r2 = r2_score(y_true, y_pred)
 
     print(f"--- {model_name} Evaluation ---")

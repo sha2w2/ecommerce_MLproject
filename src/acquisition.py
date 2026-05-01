@@ -1,61 +1,45 @@
 import os
-import urllib.request
-import zipfile
+import shutil
 import logging
-
+import kagglehub
 from config import RAW_DATA_DIR
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 
-def download_data(url: str, filename: str):
+def fetch_kaggle_data(dataset_slug: str):
     """
-    Drives to the URL, picks up the ZIP file, 
-    and drops it in the raw data folder.
+    Connects to Kaggle, downloads/unzips the dataset into a cache, 
+    and copies the files into our project's raw data directory.
     """
-    file_path = RAW_DATA_DIR / filename
+    logging.info(f"Connecting to Kaggle to fetch '{dataset_slug}'...")
 
-    if file_path.exists():
-        logging.info(
-            f"The file {filename} is already in the loading dock. Skipping download.")
-        return file_path
-
-    logging.info(f"Downloading data from {url}...")
     try:
-        urllib.request.urlretrieve(url, file_path)
-        logging.info("Download complete!")
-        return file_path
+        cache_path = kagglehub.dataset_download(dataset_slug)
+        logging.info(f"Dataset cached successfully at: {cache_path}")
+
+        logging.info("Moving files to project loading dock (data/raw/)...")
+        # Loop through the unzipped files in the cache and copy them to our RAW_DATA_DIR
+        for item in os.listdir(cache_path):
+            source_item = os.path.join(cache_path, item)
+            destination_item = RAW_DATA_DIR / item
+
+            if os.path.isdir(source_item):
+                shutil.copytree(source_item, destination_item,
+                                dirs_exist_ok=True)
+            else:
+                shutil.copy2(source_item, destination_item)
+
+        logging.info("All files successfully moved to the raw data folder!")
+
     except Exception as e:
-        logging.error(f"The delivery truck crashed: {e}")
-        return None
-
-
-def extract_data(zip_path):
-    """
-   Opens the ZIP box and unpacks the CSV files.
-    """
-    if not zip_path or not zip_path.exists():
-        logging.error("No ZIP file found to extract.")
-        return
-
-    logging.info(f"Unpacking {zip_path.name}...")
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(RAW_DATA_DIR)
-
-    logging.info("Unpacking complete. Raw data is ready for cleaning.")
+        logging.error(f"The automated pipeline failed: {e}")
 
 
 if __name__ == "__main__":
-    # Placeholder URL for the Bugzilla dataset.
-    DATA_URL = "https://example-data-lake.com/mozilla_bugzilla_dataset.zip"
-    ZIP_FILENAME = "bugzilla_data.zip"
+    # placeholder slug
+    DATASET_SLUG = "your-dataset-owner/your-dataset-name"
 
-    logging.info("--- Starting Data Acquisition Pipeline ---")
-
-    # Step 1: Download
-    downloaded_file = download_data(DATA_URL, ZIP_FILENAME)
-
-    # Step 2: Extract
-    extract_data(downloaded_file)
-
+    logging.info("Starting Automated Data Acquisition Pipeline")
+    fetch_kaggle_data(DATASET_SLUG)
     logging.info("Pipeline Finished")
