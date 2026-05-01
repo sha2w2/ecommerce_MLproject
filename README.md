@@ -32,4 +32,4 @@ python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
 - [x] `.gitignore` configured
 - [x] `config.py` and `utils.py` ready
 - [x] Data acquisition script using `kagglehub`
-- [ ] Run data acquisition to populate `data/raw/`
+- [x] Run data acquisition to populate `data/raw/`
