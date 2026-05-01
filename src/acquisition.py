@@ -37,8 +37,8 @@ def fetch_kaggle_data(dataset_slug: str):
 
 
 if __name__ == "__main__":
-    # placeholder slug
-    DATASET_SLUG = "your-dataset-owner/your-dataset-name"
+    # Thank u monika11
+    DATASET_SLUG = "monika11/bug-triagingbug-assignment"
 
     logging.info("Starting Automated Data Acquisition Pipeline")
     fetch_kaggle_data(DATASET_SLUG)
